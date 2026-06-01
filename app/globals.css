@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-ross-950 text-cream-200;
+  }
+}
+
+@layer components {
+  .color-bends-bg {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .color-bends-bg::before {
+    content: "";
+    position: absolute;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    background:
+      radial-gradient(ellipse 40% 60% at 15% 30%, rgba(26,53,88,0.6) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 75% 20%, rgba(30,109,187,0.15) 0%, transparent 50%),
+      radial-gradient(ellipse 35% 50% at 60% 80%, rgba(196,122,74,0.1) 0%, transparent 50%),
+      radial-gradient(ellipse 45% 35% at 30% 70%, rgba(26,53,88,0.35) 0%, transparent 55%);
+    background-size: 200% 200%;
+    animation: colorBend 20s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .color-bends-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(10,21,35,0.2) 0%,
+      rgba(10,21,35,0.05) 40%,
+      rgba(10,21,35,0.4) 100%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(196,122,74,0.35), transparent);
+  }
+
+  .ross-glow {
+    box-shadow: 0 0 40px rgba(196,122,74,0.15), 0 0 80px rgba(30,109,187,0.08);
+  }
+
+  .copper-text {
+    background: linear-gradient(135deg, #c47a4a, #f2cdab, #c47a4a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .card-glass {
+    @apply rounded-2xl border border-white/5 bg-ross-900/60 backdrop-blur-sm;
+  }
+
+  .pulse-dot {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .brick-texture {
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 28px,
+        rgba(196,122,74,0.04) 28px,
+        rgba(196,122,74,0.04) 30px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 60px,
+        rgba(196,122,74,0.03) 60px,
+        rgba(196,122,74,0.03) 62px
+      );
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  @keyframes colorBend {
+    0% { transform: rotate(0deg); background-position: 0% 50%; }
+    33% { background-position: 100% 25%; }
+    66% { background-position: 50% 100%; }
+    100% { transform: rotate(360deg); background-position: 0% 50%; }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
